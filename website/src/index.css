@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base theme (light) */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --fg-primary: #212529;
+  --fg-secondary: #495057;
+  --fg-tertiary: #6c757d;
+  --accent: #0d6efd;
+  
+  @apply bg-[var(--bg-primary)] text-[var(--fg-primary)];
+}
+
+/* Dark theme */
+:root.theme-dark {
+  --bg-primary: #212529;
+  --bg-secondary: #343a40;
+  --bg-tertiary: #495057;
+  --fg-primary: #f8f9fa;
+  --fg-secondary: #e9ecef;
+  --fg-tertiary: #dee2e6;
+  --accent: #0d6efd;
+}
+
+/* Gruvbox theme */
+:root.theme-gruvbox {
+  --bg-primary: #282828;
+  --bg-secondary: #3c3836;
+  --bg-tertiary: #504945;
+  --fg-primary: #ebdbb2;
+  --fg-secondary: #d5c4a1;
+  --fg-tertiary: #bdae93;
+  --accent: #fe8019;
+}
+
+/* Pastel theme */
+:root.theme-pastel {
+  --bg-primary: #faf7f5;
+  --bg-secondary: #f3e9e3;
+  --bg-tertiary: #e8d5cc;
+  --fg-primary: #5c4741;
+  --fg-secondary: #8b7355;
+  --fg-tertiary: #a69b8d;
+  --accent: #d4a5a5;
+}
+
+/* Apply transitions to color changes */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Utility classes for theme colors */
+.bg-primary { @apply bg-[var(--bg-primary)]; }
+.bg-secondary { @apply bg-[var(--bg-secondary)]; }
+.bg-tertiary { @apply bg-[var(--bg-tertiary)]; }
+.text-primary { @apply text-[var(--fg-primary)]; }
+.text-secondary { @apply text-[var(--fg-secondary)]; }
+.text-tertiary { @apply text-[var(--fg-tertiary)]; }
+.accent { @apply text-[var(--accent)]; }
+.bg-accent { @apply bg-[var(--accent)]; }
+
+/* Navbar specific styles */
+.navbar {
+  @apply bg-[var(--bg-secondary)] shadow-md;
+}
+
+/* Button styles */
+.btn {
+  @apply px-4 py-2 rounded-lg transition-all duration-200;
+}
+
+.btn-primary {
+  @apply bg-[var(--accent)] text-[var(--bg-primary)] hover:opacity-90;
+}
+
+.btn-secondary {
+  @apply bg-[var(--bg-tertiary)] text-[var(--fg-primary)] hover:opacity-90;
+}
