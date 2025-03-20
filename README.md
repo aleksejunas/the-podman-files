@@ -70,6 +70,19 @@ npm install
 npm start
 ```
 
+### Running the Backend with Auto-Reload
+
+```bash
+# In the server directory
+pnpm run dev:watch
+```
+
+This will:
+
+- Start the server on port 4002 with nodemon for auto-restart on code changes
+- Start browser-sync on port 3002 that will auto-reload the browser when backend files change
+- Access your application at http://localhost:3002
+
 ### Building for Production
 
 ```bash

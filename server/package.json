@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon",
     "build": "tsc",
-    "start": "node dist/server.ts"
+    "start": "node dist/server.ts",
+    "browser-sync": "browser-sync start --proxy 'localhost:4002' --files 'dist/**/*' --port 3002 --no-notify",
+    "dev:server": "pnpm run dev",
+    "dev:browser": "pnpm run browser-sync",
+    "dev:watch": "concurrently \"pnpm run dev:server\" \"pnpm run dev:browser\""
   },
   "keywords": [],
   "author": "",
@@ -18,6 +22,7 @@
     "@types/firebase": "^3.2.3",
     "@types/multer": "^1.4.12",
     "@types/node": "^22.9.3",
+    "browser-sync": "^3.0.3",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",

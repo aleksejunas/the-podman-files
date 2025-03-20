@@ -102,10 +102,11 @@ app.post(
     res.send(`File uploaded: ${req.file.filename}`);
   },
 );
-// Add a route for GET /
+
+// Define a basic route - FIXED DUPLICATE ROUTE
 app.get("/", (_req: Request, res: Response) => {
   res.send(
-    "Welcome to 'The Podman Files' backend server featuring nodemon for autoreloading of the server and web-browser-in-the-west upon code changes!",
+    "Welcome to 'The Podman Files' backend server featuring nodemon-tomato and browser-sync auto-reloading!",
   );
 });
 
@@ -116,7 +117,7 @@ app.use((err: Error, _req: Request, res: Response, _next: Function) => {
 });
 
 // Middleware (optional example)
-app.use(express.json()); // Parse JSON request bodies
+// app.use(express.json()); // Parse JSON request bodies - Already defined earlier
 
 // Serve static files
 app.use(express.static("public"));
@@ -125,11 +126,6 @@ app.use(express.static("public"));
 app.post("/api/data", (req: Request, res: Response) => {
   const data = req.body;
   res.json({ message: "Data received!", data });
-});
-
-// Define a basic route
-app.get("/", (_req: Request, res: Response) => {
-  res.send("Hello, TypeScript with Exprezzo-delight HALAL version!");
 });
 
 // Start the server
