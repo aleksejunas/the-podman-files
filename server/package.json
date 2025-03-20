@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts",
+    "dev": "nodemon",
     "build": "tsc",
     "start": "node dist/server.ts"
   },
@@ -29,5 +29,10 @@
     "express": "^4.21.1",
     "firebase-admin": "^13.0.1",
     "multer": "1.4.5-lts.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "protobufjs"
+    ]
   }
 }

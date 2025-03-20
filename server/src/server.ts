@@ -1,4 +1,3 @@
-// TODO: Add the code from the backend copy
 // TODO: Fix the firebase configuration in .env
 
 import cors from "cors";
@@ -6,7 +5,7 @@ import express, { NextFunction, Request, Response } from "express";
 import multer, { FileFilterCallback } from "multer";
 import path from "path";
 import * as dotenv from "dotenv";
-import { verifyToken } from "./firebaseAdminConfig"
+import { verifyToken } from "./firebaseAdminConfig";
 
 dotenv.config();
 
@@ -18,8 +17,11 @@ const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
   // fileFilter: (_req, file, cb: FileFilterCallback) => {
-  fileFilter: (_req: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
-
+  fileFilter: (
+    _req: Request,
+    file: Express.Multer.File,
+    cb: FileFilterCallback,
+  ) => {
     const allowedMimeTypes = ["image/jpeg", "image/png", "image/tiff"];
     const allowedExtensions = [".jpg", ".jpeg", ".png", ".tiff"];
 
@@ -83,26 +85,29 @@ const authenticate = async (
 //   },
 // );
 
-app.post('/upload', upload.single('file'), (req: Request, res: Response): void => {
-  if (!req.file) {
-    res.status(400).send('No file uploaded.');
-    return;
-  }
+app.post(
+  "/upload",
+  upload.single("file"),
+  (req: Request, res: Response): void => {
+    if (!req.file) {
+      res.status(400).send("No file uploaded.");
+      return;
+    }
 
-  if (req.file.size > 20 * 1024 * 1024) {
-    res.status(400).send('File is too large.');
-    return;
-  }
+    if (req.file.size > 20 * 1024 * 1024) {
+      res.status(400).send("File is too large.");
+      return;
+    }
 
-  res.send(`File uploaded: ${req.file.filename}`);
-});
+    res.send(`File uploaded: ${req.file.filename}`);
+  },
+);
 // Add a route for GET /
 app.get("/", (_req: Request, res: Response) => {
   res.send(
-    "Welcome to the PodFiles backend server featuring nodemon for autoreloading of the server and web-browser-in-the-west upon code changes!",
+    "Welcome to 'The Podman Files' backend server featuring nodemon for autoreloading of the server and web-browser-in-the-west upon code changes!",
   );
 });
-
 
 // Error handling: Add a middleware for error handling
 app.use((err: Error, _req: Request, res: Response, _next: Function) => {
