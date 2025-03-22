@@ -1,6 +1,7 @@
 import React from "react";
 import {
-  Navbar as MTNavbar,
+  Navbar,
+  Typography,
   Button,
   IconButton,
 } from "@material-tailwind/react";
@@ -10,19 +11,16 @@ import "../../index.css";
 
 const Navbar = () => {
   return (
-    <MTNavbar
-      className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4"
-      onPointerEnterCapture={() => {}}
-      placeholder={undefined}
-      onPointerLeaveCapture={undefined}
-    >
+    <Navbar className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4">
       <div className="container mx-auto flex items-center justify-between">
-        <Link
-          to="/"
-          className="mr-4 cursor-pointer py-1.5 font-medium text-lg text-fg-primary"
+        <Typography
+          as="a"
+          href="/"
+          variant="h6"
+          className="mr-4 cursor-pointer py-1.5 font-medium"
         >
           ALEKSEJUNAS.NO
-        </Link>
+        </Typography>
         <div className="hidden lg:block">
           <ul className="flex items-center gap-6">
             <li>
@@ -70,10 +68,6 @@ const Navbar = () => {
             variant="gradient"
             size="sm"
             className="hidden lg:inline-block"
-            onClick={() => alert("Contact Us clicked")}
-            onPointerLeaveCapture={() => {}}
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
           >
             <span>Contact Us</span>
           </Button>
@@ -81,10 +75,6 @@ const Navbar = () => {
             variant="text"
             className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
             ripple={false}
-            placeholder={undefined}
-            onClick={() => alert("Menu clicked")}
-            onPointerLeaveCapture={() => {}}
-            onPointerEnterCapture={undefined}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +93,7 @@ const Navbar = () => {
           </IconButton>
         </div>
       </div>
-    </MTNavbar>
+    </Navbar>
   );
 };
 
