@@ -1,3 +1,7 @@
+// FIX: Fix the background(behind) the navbar to not be white
+// TODO: Testing the dimming functionality in  leader + u + D
+// TODO: Check out more shadcn
+// TODO: Fix the rest of the styling around the navbar
 import React from "react";
 import {
   Navbar as MTNavbar,
@@ -9,9 +13,36 @@ import ThemeSwitcher from "../theme/ThemeSwitcher";
 import "../../index.css";
 
 const Navbar = () => {
+  React.useEffect(() => {
+    const root = document.documentElement;
+
+    // Load the saved theme from localStorage
+    const savedTheme = localStorage.getItem("theme") || "default";
+    root.classList.add(`theme-${savedTheme}`);
+
+    // Set the initial background based on the saved theme
+    root.style.backgroundColor =
+      savedTheme === "gruvbox"
+        ? "#282828" // Gruvbox background color
+        : savedTheme === "pastel"
+          ? "#f8f1f1" // Pastel background color
+          : "#ffffff"; // Default background color
+  }, []);
+
+  const handleThemeChange = (newTheme: string) => {
+    const root = document.documentElement;
+    // Remove existing theme classes
+    root.classList.remove("theme-gruvbox", "theme-pastel", "theme-default");
+    // Add the new theme class
+    root.classList.add(`theme-${newTheme}`);
+    // Save the new theme to localStorage
+    localStorage.setItem("theme", newTheme);
+  };
+
   return (
     <MTNavbar
-      className="mx-auto max-w-screen-xl py-2 px-4 lg:px-8 lg:py-4"
+      // TODO: Find out why bg-navbar-primary is not working
+      className="mx-auto w-full py-2 px-4 lg:px-8 lg:py-4 dark:bg-navbar-primary"
       onPointerEnterCapture={() => {}}
       placeholder={undefined}
       onPointerLeaveCapture={undefined}
@@ -64,8 +95,8 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="flex items-center gap-4">
-          <ThemeSwitcher />
+        <div className="flex items-center gap-4 bg-primary">
+          <ThemeSwitcher onThemeChange={handleThemeChange} />
           <Button
             variant="gradient"
             size="sm"
