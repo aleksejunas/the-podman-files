@@ -7,10 +7,15 @@
 import "./App.css";
 import React from "react";
 import { AppNavigator } from "./navigation";
+import { ThemeProvider } from "./components/theme/ThemeContext";
 // import "typeface-roboto";
 
 const App = () => {
-  return <AppNavigator />;
+  return (
+    <ThemeProvider>
+      <AppNavigator />
+    </ThemeProvider>
+  );
 };
 
 export default App;

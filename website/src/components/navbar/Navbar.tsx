@@ -32,16 +32,6 @@ const Navbar = () => {
     }
   }, []);
 
-  const handleThemeChange = (newTheme: string) => {
-    const root = document.documentElement;
-    // Remove existing theme classes
-    root.classList.remove("theme-gruvbox", "theme-pastel", "theme-default");
-    // Add the new theme class
-    root.classList.add(`theme-${newTheme}`);
-    // Save the new theme to localStorage
-    localStorage.setItem("theme", newTheme);
-  };
-
   return (
     <MTNavbar
       className={`mx-auto w-full py-2 px-4 lg:px-8 lg:py-4 ${savedTheme === "light" ? "bg-gray-100 text-gray-900" : "bg-gruvbox-bg-navbar-primary text-fg-primary"}  border-2 border-blue-400`}
@@ -83,7 +73,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex items-center gap-4 bg-primary">
-          <ThemeSwitcher onThemeChange={handleThemeChange} />
+          <ThemeSwitcher />
           <Button variant="gradient" size="sm" className="hidden lg:inline-block" onClick={() => alert("Contact Us clicked")} onPointerLeaveCapture={() => {}} placeholder={undefined} onPointerEnterCapture={undefined}>
             <span>Contact Us</span>
           </Button>

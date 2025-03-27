@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaSun, FaMoon, FaPalette } from "react-icons/fa";
-import { switchTheme } from "../../utils/ThemeSwitcher";
+import { useTheme } from "./ThemeContext";
 
 type Theme = "light" | "dark" | "gruvbox" | "pastel";
 
@@ -17,8 +17,8 @@ const themes: ThemeOption[] = [
     name: "light",
     icon: <FaSun className="text-yellow-500" />,
     label: "Light",
-    bgColor: "bg-gray-100", // Updated for better contrast
-    textColor: "text-gray-900", // Updated for better readability
+    bgColor: "bg-gray-100",
+    textColor: "text-gray-900",
   },
   {
     name: "dark",
@@ -43,31 +43,16 @@ const themes: ThemeOption[] = [
   },
 ];
 
-interface ThemeSwitcherProps {
-  onThemeChange: (theme: Theme) => void;
-}
-
-const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ onThemeChange }) => {
-  const [currentTheme, setCurrentTheme] = useState<Theme>("light");
+const ThemeSwitcher: React.FC = () => {
+  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    // Load saved theme preference
-    const savedTheme = localStorage.getItem("selectedTheme") as Theme;
-    if (savedTheme && themes.some((theme) => theme.name === savedTheme)) {
-      setCurrentTheme(savedTheme);
-      switchTheme(savedTheme);
-    }
-  }, []);
-
   const handleThemeChange = (theme: Theme) => {
-    setCurrentTheme(theme);
-    switchTheme(theme);
-    onThemeChange(theme);
+    setTheme(theme);
     setIsOpen(false);
   };
 
-  const currentThemeOption = themes.find((theme) => theme.name === currentTheme)!;
+  const currentThemeOption = themes.find((t) => t.name === theme)!;
 
   return (
     <div className="relative">
@@ -75,17 +60,10 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ onThemeChange }) => {
         <span>{currentThemeOption.icon}</span>
         <span className="hidden md:inline">{currentThemeOption.label}</span>
       </button>
-      {/* TODO: Fix the background and text color when in light themes so it's readable */}
       {isOpen && (
         <div
           className={`absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50 ${
-            currentTheme === "light"
-              ? "bg-white text-gray-900"
-              : currentTheme === "gruvbox"
-              ? "bg-[#3c3836] text-[#ebdbb2]" // Gruvbox dropdown colors
-              : currentTheme === "pastel"
-              ? "bg-[#f3e9e3] text-[#5c4741]" // Pastel dropdown colors
-              : "bg-navbar-primary text-fg-navbar-primary dark:bg-gray-800"
+            theme === "light" ? "bg-white text-gray-900" : theme === "gruvbox" ? "bg-[#3c3836] text-[#ebdbb2]" : theme === "pastel" ? "bg-[#f3e9e3] text-[#5c4741]" : "bg-navbar-primary text-fg-navbar-primary dark:bg-gray-800"
           } ring-1 ring-black ring-opacity-5`}
         >
           <div className="py-1" role="menu" aria-orientation="vertical">
@@ -93,20 +71,16 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ onThemeChange }) => {
               <button
                 key={theme.name}
                 onClick={() => handleThemeChange(theme.name)}
-                className={`
-                    w-full flex items-center px-4 py-2 text-sm
-                    ${
-                      currentTheme === theme.name
-                        ? currentTheme === "gruvbox"
-                          ? "bg-[#504945] text-[#ebdbb2]" // Gruvbox active item
-                          : currentTheme === "pastel"
-                          ? "bg-[#e8d5cc] text-[#5c4741]" // Pastel active item
-                          : "bg-gray-100 dark:bg-gray-700"
-                        : ""
-                    }
-                    hover:bg-gray-100 dark:hover:bg-gray-700
-                    transition-colors
-                  `}
+                className={
+                  `w-full flex items-center px-4 py-2 text-sm ` +
+                  (theme.name === currentThemeOption.name
+                    ? theme.name === "gruvbox"
+                      ? "bg-[#504945] text-[#ebdbb2]"
+                      : theme.name === "pastel"
+                      ? "bg-[#e8d5cc] text-[#5c4741]"
+                      : "bg-gray-100 dark:bg-gray-700"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-700")
+                }
                 role="menuitem"
               >
                 <span className="mr-3">{theme.icon}</span>
