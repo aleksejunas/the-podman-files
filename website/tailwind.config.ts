@@ -42,7 +42,7 @@ const customUtilitiesPlugin: PluginCreator = ({ addUtilities, theme }) => {
 };
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", "./index.html"],
   theme: {
     extend: {

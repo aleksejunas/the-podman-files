@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { switchTheme } from "../../utils/ThemeSwitcher";
 
 // Define the shape of the theme context
 interface ThemeContextProps {
@@ -16,10 +17,18 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return localStorage.getItem("theme") || "light";
   });
 
+  // Apply the theme when it changes
   useEffect(() => {
-    // Save the theme to localStorage whenever it changes
+    // Save the theme to localStorage
     localStorage.setItem("theme", theme);
+
+    // Apply the theme using the existing switchTheme function
+    switchTheme(theme);
+
+    // Also set the data-theme attribute for Tailwind
     document.documentElement.setAttribute("data-theme", theme);
+
+    console.log("Theme set to:", theme);
   }, [theme]);
 
   return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
