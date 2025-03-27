@@ -14,6 +14,9 @@ export function switchTheme(theme: string) {
     root.classList.add(`theme-${theme}`);
   } else if (theme === "dark") {
     root.classList.add("dark");
+  } else if (theme === "light") {
+    root.style.backgroundColor = "#f8f9fa"; // Light theme background
+    root.style.color = "#212529"; // Light theme text color
   } else {
     console.warn(`Unknown theme: ${theme}. Falling back to light theme.`);
   }
@@ -25,16 +28,5 @@ export function initializeTheme() {
   const savedTheme = localStorage.getItem("selectedTheme") || "light";
   switchTheme(savedTheme);
 }
-
-// switch (theme) {
-//   case "gruvbox":
-//     root.classList.add("theme-gruvbox");
-//     break;
-//   case "pastel":
-//     root.classList.add("theme-pastel");
-//     break;
-//   default:
-//     break;
-// }
 
 // Add logic for other themes here

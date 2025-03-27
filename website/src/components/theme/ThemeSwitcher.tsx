@@ -17,8 +17,8 @@ const themes: ThemeOption[] = [
     name: "light",
     icon: <FaSun className="text-yellow-500" />,
     label: "Light",
-    bgColor: "bg-white",
-    textColor: "text-gray-900",
+    bgColor: "bg-gray-100", // Updated for better contrast
+    textColor: "text-gray-900", // Updated for better readability
   },
   {
     name: "dark",
@@ -38,8 +38,8 @@ const themes: ThemeOption[] = [
     name: "pastel",
     icon: <FaPalette className="text-pink-300" />,
     label: "Pastel",
-    bgColor: "bg-pastel-primary",
-    textColor: "text-pastel-fg-primary",
+    bgColor: "bg-[#f8f1f1]",
+    textColor: "text-[#5c4741]",
   },
 ];
 
@@ -67,34 +67,46 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ onThemeChange }) => {
     setIsOpen(false);
   };
 
-  const currentThemeOption = themes.find(
-    (theme) => theme.name === currentTheme,
-  )!;
+  const currentThemeOption = themes.find((theme) => theme.name === currentTheme)!;
 
   return (
     <div className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-opacity-80 transition-colors"
-        aria-label="Theme switcher"
-      >
+      <button onClick={() => setIsOpen(!isOpen)} className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-opacity-80 transition-colors" aria-label="Theme switcher">
         <span>{currentThemeOption.icon}</span>
         <span className="hidden md:inline">{currentThemeOption.label}</span>
       </button>
-
+      {/* TODO: Fix the background and text color when in light themes so it's readable */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-navbar-primary text-fg-navbar-primary dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-50">
+        <div
+          className={`absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50 ${
+            currentTheme === "light"
+              ? "bg-white text-gray-900"
+              : currentTheme === "gruvbox"
+              ? "bg-[#3c3836] text-[#ebdbb2]" // Gruvbox dropdown colors
+              : currentTheme === "pastel"
+              ? "bg-[#f3e9e3] text-[#5c4741]" // Pastel dropdown colors
+              : "bg-navbar-primary text-fg-navbar-primary dark:bg-gray-800"
+          } ring-1 ring-black ring-opacity-5`}
+        >
           <div className="py-1" role="menu" aria-orientation="vertical">
             {themes.map((theme) => (
               <button
                 key={theme.name}
                 onClick={() => handleThemeChange(theme.name)}
                 className={`
-                  w-full flex items-center px-4 py-2 text-sm
-                  ${currentTheme === theme.name ? "bg-gray-100 dark:bg-gray-700" : ""}
-                  hover:bg-gray-100 dark:hover:bg-gray-700
-                  transition-colors
-                `}
+                    w-full flex items-center px-4 py-2 text-sm
+                    ${
+                      currentTheme === theme.name
+                        ? currentTheme === "gruvbox"
+                          ? "bg-[#504945] text-[#ebdbb2]" // Gruvbox active item
+                          : currentTheme === "pastel"
+                          ? "bg-[#e8d5cc] text-[#5c4741]" // Pastel active item
+                          : "bg-gray-100 dark:bg-gray-700"
+                        : ""
+                    }
+                    hover:bg-gray-100 dark:hover:bg-gray-700
+                    transition-colors
+                  `}
                 role="menuitem"
               >
                 <span className="mr-3">{theme.icon}</span>

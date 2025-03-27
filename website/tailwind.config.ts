@@ -50,6 +50,11 @@ const config: Config = {
         sans: ["Roboto", "sans-serif"],
       },
       colors: {
+        light: {
+          "bg-primary": "#f8f9fa", // Light theme background
+          "fg-primary": "#212529", // Light theme text
+          "fg-secondary": "#495057", // Secondary text
+        },
         gruvbox: {
           "bg-primary": "#282828",
           "bg-secondary": "#3c3836",
@@ -58,12 +63,6 @@ const config: Config = {
           "fg-secondary": "#d5c4a1",
           "fg-tertiary": "#bdae93",
           "fg-quaternary": "#a89984",
-          "bg-navbar-primary": "#3c3836",
-          "bg-navbar-secondary": "#504945",
-          "fg-navbar-primary": "#ebdbb2",
-          "fg-navbar-secondary": "#d5c4a1",
-          "fg-navbar-tertiary": "#bdae93",
-          "fg-navbar-quaternary": "#a89984",
           red: "#cc241d",
           green: "#98971a",
           yellow: "#d79921",
@@ -77,28 +76,24 @@ const config: Config = {
           sanityPeach: "#F77769",
         },
         pastel: {
-          "bg-primary": "#777777", // Brighter white for better contrast
-          "bg-secondary": "#f0f0ff", // Slightly darker for contrast
-          "bg-tertiary": "#ffe4e1", // Keeping as is
-          "fg-primary": "#000000", // Darker gray for better readability
-          "fg-secondary": "#505050", // Slightly darker gray
-          "fg-tertiary": "#808080", // Keeping as is
-          "fg-quaternary": "#a0a0a0", // Slightly darker
-          "bg-navbar-primary": "#f0f0ff", // Slightly darker for contrast
-          "bg-navbar-secondary": "#ffe4e1", // Keeping as is  "fg-navbar-primary": "#000000", // Darker gray for better readability
-          "fg-navbar-secondary": "#505050", // Slightly darker gray
-          "fg-navbar-tertiary": "#808080", // Keeping as is "fg-navbar-quaternary": "#a0a0a0", // Slightly Darker
-          "fg-navbar-quaternary": "#a0a0a0", // Slightly Darker
-
-          red: "#ff7f7f", // More vibrant red
-          green: "#7fff7f", // More vibrant green
-          yellow: "#ffff7f", // More vibrant yellow
-          blue: "#7fafff", // More vibrant blue
-          purple: "#bf7fff", // More vibrant purple
-          aqua: "#7fffff", // More vibrant aqua
-          orange: "#ffaf7f", // More vibrant orange
-          gray: "#b0b0b0", // Slightly darker gray
-          warning: "#ffd700", // Brighter yellow for warnings danger: "#ff4040", // More vibrant danger red sanityPeach: "#F77769", // Keeping as is
+          "bg-primary": "#f8f1f1",
+          "bg-secondary": "#e6e6fa",
+          "bg-tertiary": "#ffe4e1",
+          "fg-primary": "#5c4741",
+          "fg-secondary": "#808080",
+          "fg-tertiary": "#a9a9a9",
+          "fg-quaternary": "#c0c0c0",
+          red: "#ffb6c1",
+          green: "#98fb98",
+          yellow: "#fffacd",
+          blue: "#add8e6",
+          purple: "#dda0dd",
+          aqua: "#e0ffff",
+          orange: "#ffdab9",
+          gray: "#d3d3d3",
+          warning: "#ffeb3b",
+          danger: "#ff5252",
+          sanityPeach: "#F77769",
         },
         stone, // Correctly imported Tailwind's stone palette
         background: "hsl(var(--background))",
