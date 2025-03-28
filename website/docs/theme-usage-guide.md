@@ -2,7 +2,9 @@
 
 ## Overview
 
-The theming system allows dynamic switching between predefined themes (e.g., light, dark, gruvbox, pastel) in the application. This guide explains how to use and extend the theming system.
+The theming system allows dynamic switching between predefined themes
+(e.g., light, dark, gruvbox, pastel) in the application. This guide explains
+how to use and extend the theming system.
 
 ## How to Use the Theming System
 
@@ -42,7 +44,8 @@ The theming system allows dynamic switching between predefined themes (e.g., lig
 
 ### 3. Using the useTheme Hook
 
-- The `useTheme` hook gives components access to the current theme and the ability to change it:
+- The `useTheme` hook gives components access to the current theme and the
+  ability to change it:
 
   ```tsx
   import { useTheme } from "../components/theme/ThemeContext";
@@ -63,6 +66,7 @@ The theming system allows dynamic switching between predefined themes (e.g., lig
 
 - Define new themes in `tailwind.config.ts` under the `extend.colors` section.
 - Example:
+
   ```js
   colors: {
     newTheme: {
@@ -72,7 +76,9 @@ The theming system allows dynamic switching between predefined themes (e.g., lig
     },
   }
   ```
+
 - Add the new theme to the `themes` array in `ThemeSwitcher.tsx`:
+
   ```tsx
   {
     name: "newTheme",
@@ -88,13 +94,15 @@ The theming system allows dynamic switching between predefined themes (e.g., lig
 - Use Tailwind CSS classes like `bg-primary` and `text-primary` in your components.
 - These classes will dynamically change based on the current theme.
 - Example:
+
   ```tsx
   <div className="bg-primary text-fg-primary p-4">Themed content</div>
   ```
 
 ### 6. Forcing Re-renders for Theme Changes
 
-- If a component doesn't update when the theme changes, use the `theme` value as a `key` prop:
+- If a component doesn't update when the theme changes, use the `theme`
+  value as a `key` prop:
 
   ```tsx
   const { theme } = useTheme();
@@ -115,9 +123,12 @@ The theming system allows dynamic switching between predefined themes (e.g., lig
 
 ### 2. Theme Application
 
-- The `ThemeContext` updates the `data-theme` attribute on the `document.documentElement` (`<html>` element).
-- Tailwind CSS is configured with `darkMode: ["attribute", "data-theme"]` to detect and apply theme styles.
-- The original `switchTheme` function from `utils/ThemeSwitcher.ts` is also used to ensure compatibility with existing code.
+- The `ThemeContext` updates the `data-theme` attribute on the
+  `document.documentElement` (`<html>` element).
+- Tailwind CSS is configured with `darkMode: ["attribute", "data-theme"]`
+  to detect and apply theme styles.
+- The original `switchTheme` function from `utils/ThemeSwitcher.ts` is also used
+  to ensure compatibility with existing code.
 
 ### 3. Theme Switching Logic
 
@@ -141,9 +152,12 @@ useEffect(() => {
 ### Custom Theme Not Working
 
 - Make sure your theme colors are correctly defined in `tailwind.config.ts`.
-- Verify that the theme name in `ThemeSwitcher.tsx` matches the theme key in the config.
+- Verify that the theme name in `ThemeSwitcher.tsx` matches the theme key
+  in the config.
 - Check browser console for any errors related to the theme.
 
 ## Conclusion
 
-The theming system is designed to be flexible, maintainable, and provide immediate visual feedback. With the centralized `ThemeContext` and dynamic re-rendering, theme changes are applied consistently across the application.
+The theming system is designed to be flexible, maintainable, and provide
+immediate visual feedback. With the centralized `ThemeContext` and dynamic
+re-rendering, theme changes are applied consistently across the application.

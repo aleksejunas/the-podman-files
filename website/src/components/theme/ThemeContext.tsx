@@ -11,7 +11,9 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 // ThemeProvider component
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [theme, setTheme] = useState<string>(() => {
     // Load the initial theme from localStorage or default to 'light'
     return localStorage.getItem("theme") || "light";
@@ -31,7 +33,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     console.log("Theme set to:", theme);
   }, [theme]);
 
-  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };
 
 // Custom hook to use the ThemeContext

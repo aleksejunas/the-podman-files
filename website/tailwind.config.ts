@@ -1,3 +1,5 @@
+// TODO: Make the themes look nicer
+
 import type { Config } from "tailwindcss";
 import { stone } from "tailwindcss/colors";
 import type { PluginCreator } from "tailwindcss/types/config";
