@@ -6,45 +6,34 @@ import React from "react";
 import { Navbar as MTNavbar, Button, IconButton } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import ThemeSwitcher from "../theme/ThemeSwitcher";
+import { useTheme } from "../theme/ThemeContext";
 import "../../index.css";
 
 const Navbar = () => {
-  const [savedTheme, setSavedTheme] = React.useState("default");
+  const { theme } = useTheme();
 
-  React.useEffect(() => {
-    const root = document.documentElement;
-
-    // Load the saved theme from localStorage
-    const theme = localStorage.getItem("theme") || "default";
-    setSavedTheme(theme);
-    root.classList.add(`theme-${theme}`);
-
-    // Set the initial background and text colors based on the saved theme
-    if (theme === "gruvbox") {
-      root.style.backgroundColor = "#282828"; // Gruvbox background color
-      root.style.color = "#ebdbb2"; // Gruvbox text color
-    } else if (theme === "pastel") {
-      root.style.backgroundColor = "#f8f1f1"; // Pastel background color
-      root.style.color = "#5c4741"; // Pastel text color
-    } else {
-      root.style.backgroundColor = "#ffffff"; // Default background color
-      root.style.color = "#212529"; // Default text color
+  // Choose navbar styling based on theme
+  const getNavbarStyle = () => {
+    switch (theme) {
+      case "light":
+        return "bg-gray-100 text-gray-900";
+      case "dark":
+        return "bg-[#343a40] text-[#f8f9fa]"; // Using exact dark theme colors from CSS variables
+      case "gruvbox":
+        return "bg-gruvbox-bg-secondary text-gruvbox-fg-primary";
+      case "pastel":
+        return "bg-pastel-bg-secondary text-pastel-fg-primary";
+      default:
+        return "bg-gray-100 text-gray-900";
     }
-  }, []);
+  };
 
   return (
-    <MTNavbar
-      className={`mx-auto w-full py-2 px-4 lg:px-8 lg:py-4 ${savedTheme === "light" ? "bg-gray-100 text-gray-900" : "bg-gruvbox-bg-navbar-primary text-fg-primary"}  border-2 border-blue-400`}
-      onPointerEnterCapture={() => {}}
-      placeholder={undefined}
-      onPointerLeaveCapture={undefined}
-    >
+    <MTNavbar className={`mx-auto w-full py-2 px-4 lg:px-8 lg:py-4 ${getNavbarStyle()} border-2 border-blue-400`} onPointerEnterCapture={() => {}} placeholder={undefined} onPointerLeaveCapture={undefined}>
       <div className="container mx-auto flex items-center justify-between">
-        <Link to="/" className="mr-4 cursor-pointer py-1.5 font-medium text-lg text-fg-primary">
-          ALEKSEJUNAS.NO
-        </Link>
-        <div className="hidden lg:block">
-          <ul className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
+          <h1 className="text-2xl font-bold">ALEKSEJUNAS.NO</h1>
+          <ul className="hidden lg:flex items-center gap-8">
             <li>
               <Link to="/" className="text-fg-primary hover:text-fg-secondary">
                 Home
